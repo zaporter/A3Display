@@ -1,6 +1,107 @@
+<!DOCTYPE html>
 <html>
+    <head>
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+        <link rel="stylesheet" type="text/css" href="plugin/codemirror/lib/codemirror.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <title>A3 LED Board</title>
+    </head>
+
 	<body>
-		<h1> Oh yeah stodd rocx
-		</h1>
-		</body>
-	</html>
+        <header class="no-padding">
+            <div class="navbar-fixed">
+                <nav class="navbar-fixed light-blue">
+                    <div class="container nav-wrapper">
+                        <center><span id="header-large" style="font-weight:300;font-size:2rem;">A3 LED Board</span></center>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        
+        <main>
+            <div class="container">
+                <div class="section">
+                    <h4>Instructions</h4>
+                    <p>Welcome to the code submission page. Here you can upload your own code to the A3 LED light panel Pi. Before submitting, preview the result. For help programming the board, see the <a href="#!">documentation</a>.</p> 
+                <div class="section">
+                    <h5>Code Submission</h5>
+                        <form action="." method="post">
+                            <div class="row">
+                                <div class="col s12">
+                                    <p>Enter code here:</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <textarea id="code-field" class="codemirror-textarea" name="code"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="password-field" type="password" class="validate" name="passphrase">
+                                    <label for="password">Passphrase</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12">
+                                    <button id="preview-button" onclick="M.toast({html: 'Getting preview...'})" class="waves-effect waves-light light-blue btn" type="submit" name="preview">preview</button> 
+                                </div>
+                            </div>
+                        </form>
+                        <div class="row">
+                            <div class="col s12">
+                                <h5>Preview</h5>
+                                <p>The output image will display here:</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <!-- enter gif code here-->
+                                <img id="preview-img" width="650" src="">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <button id="upload-button" onclick="M.toast({html: 'Submitting...'})" class="btn disabled">upload</a>
+                            </div>
+                        </div>
+                </div>
+                    </div>
+                </div>
+                
+            </div>
+        </main>
+
+        <footer class="page-footer light-blue">
+            <div class="container">
+                <div class="row">
+                    <div class="col 16 s12">
+                        <h5 class="white-text">Some text</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container">
+                    © 2019 Stoddard A3 
+                    <a class="grey-text text-lighten-4 right" href="#!">Github Project</a>
+                </div>
+            </div>
+        </footer>
+
+        <!-- javascript -->
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="plugin/codemirror/lib/codemirror.js"></script>
+        <script type="text/javascript" src="js/default.js"></script>
+        <script type="text/javascript" src="plugin/codemirror/mode/python/python.js"></script>
+        <script type="text/javascript" src="plugin/codemirror/keymap/vim.js"></script>
+
+        <script type="text/javascript">
+            document.getElementById("preview-button").onclick = function () {
+                document.getElementById("upload-button").setAttribute("class", "waves-effect waves-light light-blue btn");
+            }
+        </script>
+    </body>
+
+</html>
