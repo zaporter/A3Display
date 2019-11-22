@@ -7,14 +7,15 @@ import math
 import time
 from neopixel import *
 import argparse
-import basicDisp
-import animations
-import imageControl
+from basicDisp import *
+from animations import *
+from imageControl import *
 
 def runDisplay(strip, filename):
     f = open(filename, "r")
     command = f.read();
-    exec(command)
+    ikf = locals()
+    exec(command,globals(),locals())
 
 if __name__ == '__main__':
     print("Starting!")
@@ -41,5 +42,4 @@ if __name__ == '__main__':
     else:
         print("No file passed. Please use -f")
     print("ending")
-
 

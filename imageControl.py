@@ -1,4 +1,8 @@
 
+from PIL import Image, ImageFont, ImageDraw
+from neopixel import *
+from basicDisp import *
+from a3time import *
 
 def pushImage(strip, img):
     for x in range(LED_COLS):
@@ -35,38 +39,15 @@ def scrollText(strip, img, text, font, colorRGB, wait_ms, scroll_no, loc=(0,0)):
     draw = ImageDraw.Draw(img)
     draw.text(loc,text,font=font,fill=colorRGB)
     size= draw.textsize(text,font)
-    print("text width: ",size[0])
     for i in range(scroll_no):
-	#scroll_loc=(size[0]-25,loc[1])
 	scroll_loc=(LED_COLS,loc[1])
 	for x in range(size[0]+LED_COLS):
-	    """
 	    draw.text(scroll_loc,text,font=font,fill=colorRGB)
 	    scroll_loc=(scroll_loc[0]-1,scroll_loc[1])
 	    pushImage(strip,img)
 	    img = back_img.copy()
 	    draw = ImageDraw.Draw(img)
-	    time.sleep(wait_ms/1000.0)
-	    """
-	    #print(scroll_loc)
-	    draw.text(scroll_loc,text,font=font,fill=colorRGB)
-	    scroll_loc=(scroll_loc[0]-1,scroll_loc[1])
-	    pushImage(strip,img)
-	    img = back_img.copy()
-	    draw = ImageDraw.Draw(img)
-	    time.sleep(wait_ms/1000.0)
-    """
-    while not isEquivImg(back_img,img):
-	draw.text(start_loc,text,font=font,fill=colorRGB)
-	start_loc=(start_loc[0]-1,start_loc[1])
-	img = back_img.copy()
-	draw = ImageDraw.Draw(img)
-    for i in range(scroll_no):
-	scroll_loc=start_loc
-	for x in range(-1*start_loc[0]):
-	    print(scroll_loc)
-
-    """
+	    sleep_ms(wait_ms)
 
 def drawBorder(img, color, justTop=False):
     draw = ImageDraw.Draw(img)
