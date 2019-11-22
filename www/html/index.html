@@ -6,6 +6,34 @@
         <link rel="stylesheet" type="text/css" href="plugin/codemirror/lib/codemirror.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <!--LOAD SUBMISSION SCRIPTS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script>
+        $(document).ready(function(){
+          $("preview-button").click(function(){
+            $.post("preview.php",
+            {
+              preview: "true",
+              password: $("password-field").val(),
+              code: $("code-field").val()
+            },
+            function(data,status){
+              alert("Data: " + data + "\nStatus: " + status);
+            });
+          });
+          $("upload-button").click(function(){
+            $.post("upload.php",
+            {
+              preview: "false",
+              password: $("password-field").val(),
+              code: $("code-field").val()
+            },
+            function(data,status){
+              alert("Data: " + data + "\nStatus: " + status);
+            });
+          });
+        });
+        </script>
         <title>A3 LED Board</title>
     </head>
 
@@ -24,7 +52,7 @@
             <div class="container">
                 <div class="section">
                     <h4>Instructions</h4>
-                    <p>Welcome to the code submission page. Here you can upload your own code to the A3 LED light panel Pi. Before submitting, preview the result. For help programming the board, see the <a href="#!">documentation</a>.</p> 
+                    <p>Welcome to the code submission page. Here you can upload your own code to the A3 LED light panel Pi. Before submitting, preview the result. For help programming the board, see the <a href="documentation.html">documentation</a>.</p> 
                 <div class="section">
                     <h5>Code Submission</h5>
                         <form action="." method="post">
@@ -84,7 +112,7 @@
             </div>
             <div class="footer-copyright">
                 <div class="container">
-                    © 2019 Stoddard A3 
+                    © 2019 Stoddard A3
                     <a class="grey-text text-lighten-4 right" href="#!">Github Project</a>
                 </div>
             </div>
