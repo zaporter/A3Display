@@ -1,8 +1,13 @@
+# Supports ability to manipulate PIL images
+# Author: Jake Roller
+
 
 from PIL import Image, ImageFont, ImageDraw
 from neopixel import *
 from basicDisp import *
 from a3time import *
+
+
 
 def pushImage(strip, img):
     for x in range(LED_COLS):

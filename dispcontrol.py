@@ -21,11 +21,10 @@ if __name__ == '__main__':
     print("Starting!")
     run = True
     parser = argparse.ArgumentParser()
-    parser.add_argument("-h","--help", help="print help")
-    parser.add_argument("-r","--run", help="run code")
-    parser.add_argument("-p","--prev", help="preview")
-    parser.add_argument("-f","--file", type=str, help="code file")
-    parser.parse_args()
+    parser.add_argument("-r","--run", action="store_true", help="run code")
+    parser.add_argument("-p","--prev", action="store_true", help="preview")
+    parser.add_argument("-f","--file", action="store", type=str, help="code file")
+    parser = parser.parse_args()
     if (parser.run):
         print("Running")
         run = True
@@ -35,8 +34,11 @@ if __name__ == '__main__':
     else:
         print("No mode set. Assuming run")
         run = True
-    strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
-    strip.begin()
+    strip=0
+    if run:
+        strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
+        strip.begin()
+
     if (parser.file):
         runDisplay(strip, parser.file)
     else:

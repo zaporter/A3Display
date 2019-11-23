@@ -1,3 +1,5 @@
+#Super simple animations
+#Author: Zack Porter
 
 from basicDisp import *
 from a3time import *

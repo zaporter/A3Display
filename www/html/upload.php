@@ -1,16 +1,16 @@
+
 <html>
 <body>
-
 <?php
-echo shell_exec('echo 123 > testdir/yeah.txt');
+#$fp = fopen('/home/pi/currentcode.py', 'w');
+#fwrite($fp, $_POST["code"]);
+#fclose($fp);
+
+shell_exec("bash /home/pi/update.sh > /dev/null &");
 ?>
-Welcome <?php echo $_POST["preview"]; ?><br>
+Preview: <?php echo $_POST["preview"]; ?><br>
+Pass: <?php echo $_POST["password"]; ?>
 Code: <?php echo $_POST["code"]; ?>
-
-LS:
-<?php
-echo shell_exec("ls");
-?>
 </body>
 </html>
 

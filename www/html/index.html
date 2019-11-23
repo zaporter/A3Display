@@ -6,39 +6,11 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="plugin/codemirror/lib/codemirror.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<<<<<<< HEAD
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-        <!--LOAD SUBMISSION SCRIPTS -->
+	<!--LOAD SUBMISSION SCRIPTS -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script>
-        $(document).ready(function(){
-          $("preview-button").click(function(){
-            $.post("preview.php",
-            {
-              preview: "true",
-              password: $("password-field").val(),
-              code: $("code-field").val()
-            },
-            function(data,status){
-              alert("Data: " + data + "\nStatus: " + status);
-            });
-          });
-          $("upload-button").click(function(){
-            $.post("upload.php",
-            {
-              preview: "false",
-              password: $("password-field").val(),
-              code: $("code-field").val()
-            },
-            function(data,status){
-              alert("Data: " + data + "\nStatus: " + status);
-            });
-          });
-        });
-        </script>
-=======
->>>>>>> 21f28f6d92a378df65f45cca80f690ba333b24a0
-        <title>A3 LED Board</title>
+        
+	<title>A3 LED Board</title>
     </head>
 
     <body>
@@ -62,7 +34,7 @@
                     <p>Welcome to the code submission page. Here you can upload your own code to the A3 LED light panel Pi. Before submitting, preview the result. For help programming the board, see the <a href="documentation.html">documentation</a>.</p> 
                 <div class="section">
                     <h5>Code Submission</h5>
-                        <form action="." method="post">
+		    <!--<form action="." method="post">-->
                             <div class="row">
                                 <div class="col s12">
                                     <p>Enter code here:</p>
@@ -89,10 +61,10 @@
                                     <p>By clicking preview you are submitting your code to our engine to generate a sample. Once you are satisfied, you can upload the code to the board.</p>
                             <div class="row">
                                 <div class="col s12">
-                                    <button id="preview-button" onclick="M.toast({html: 'Getting preview...'})" class="waves-effect waves-light light-blue btn" type="submit" name="preview">preview</button> 
+                                    <button id="preview-button" class="waves-effect waves-light light-blue btn" name="preview">preview</button> 
                                 </div>
                             </div>
-                        </form>
+			    <!--</form>-->
                         <div class="row">
                             <div class="col s12">
                                 <h5>Preview</h5>
@@ -140,11 +112,12 @@
         <script type="text/javascript" src="plugin/codemirror/mode/python/python.js"></script>
         <script type="text/javascript" src="plugin/codemirror/keymap/vim.js"></script>
 
-        <script type="text/javascript">
-            document.getElementById("preview-button").onclick = function () {
+	<!--<script type="text/javascript">
+		document.getElementById("preview-button").onclick = function () {
                 document.getElementById("upload-button").setAttribute("class", "waves-effect waves-light light-blue btn");
             }
         </script>
+	-->
     </body>
 
 </html>
