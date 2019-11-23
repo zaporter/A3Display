@@ -8,13 +8,14 @@ $(document).ready(function(){
 	});
 
 	$("#preview-button").click(function(){
-	    $.post("preview.php",
+	    $.post("lol.php",
             {
               preview: "true",
               password: $("#password-field").val(),
               code: editor.getValue()
             },
             function(data,status){
+		    alert("Got here");
               alert("Data: " + data + "\nStatus: " + status);
             });
           });
