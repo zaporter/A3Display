@@ -7,29 +7,41 @@ $(document).ready(function(){
         //, keyMap : "vim"
 	});
 
-	$("#preview-button").click(function(){
-	    $.post("lol.php",
+    $("#preview-button").click(function(){
+        $.post("lol.php",
             {
               preview: "true",
               password: $("#password-field").val(),
               code: editor.getValue()
             },
             function(data,status){
-		    alert("Got here");
-              alert("Data: " + data + "\nStatus: " + status);
-            });
-          });
+                if (status.equals("success")) {
+                    M.toast({html: "Success"})
+                }
+                else {
+                    M.toast({html: "Failed"});
+                }
+            }
+        );
+    });
+    
 
-  	$("#upload-button").click(function(){
-            $.post("upload.php",
+    $("#upload-button").click(function(){
+        $.post("upload.php",
             {
               preview: "false",
               password: $("#password-field").val(),
               code: editor.getValue()
             },
             function(data,status){
-              alert("Data: " + data + "\nStatus: " + status);
-            });
-  	});
+                if (status.equals("success")) {
+                    M.toast({html: "Success"})
+                }
+                else {
+                    M.toast({html: "Failed"});
+                }
+            }
+        );  	
+    });
 });
 
