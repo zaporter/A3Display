@@ -15,12 +15,7 @@ $(document).ready(function(){
               code: editor.getValue()
             },
             function(data,status){
-                if (status.equals("success")) {
-                    M.toast({html: "Success"})
-                }
-                else {
-                    M.toast({html: "Failed"});
-                }
+                    M.toast({html: data})
             }
         );
     });
