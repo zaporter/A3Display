@@ -13,6 +13,7 @@ else {
 	$result = "Incorrect Password";
 }
 echo $result;
+/*echo password_hash("pw", PASSWORD_DEFUALT);*/
 ?>
 </body>
 </html>
