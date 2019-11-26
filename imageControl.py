@@ -64,7 +64,6 @@ def drawBorder(img, color, justTop=False):
 
 def displayText(strip, text, text_color, bg_color, speed):
     """Renders scrolling text in helvetic font with a given bg and text color (R, G, B) and a given update speed"""
-    anim_biFlash(strip, Color(200,0,0), Color(0,0,200), 10, 150)
     font = ImageFont.truetype("fonts/helvetica.ttf", 14)
     image = Image.new('RGB',(25,12),color=bg_color)
-    scrollText(strip, image, text.upper(), font, text_color, speed, 200000, loc=(0,0))
+    scrollText(strip, image, text.upper(), font, text_color, speed, 200000, loc=(0,1))
