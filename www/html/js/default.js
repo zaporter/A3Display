@@ -1,11 +1,18 @@
 $(document).ready(function(){
-	//code here...
+
 	var code = $(".codemirror-textarea")[0];
 	var editor = CodeMirror.fromTextArea(code, {
 		lineNumbers : true,
-        mode : "python"
-        //, keyMap : "vim"
+        	mode : "python"
+        	//, keyMap : "vim"
 	});
+
+	$.get('http://a3disp.dyn.wpi.edu/currentCode.txt',
+		function(data) {
+			currentCode = data;
+			editor.setValue(currentCode);
+		});
+	
 
     $("#preview-button").click(function(){
         $.post("lol.php",
@@ -20,7 +27,6 @@ $(document).ready(function(){
         );
     });
     
-
     $("#upload-button").click(function(){
         $.post("upload.php",
             {
