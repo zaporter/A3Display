@@ -60,7 +60,7 @@
                                     <p>By clicking preview you are submitting your code to our engine to generate a sample. Once you are satisfied, you can upload the code to the board.</p>
                             <div class="row">
                                 <div class="col s12">
-                                    <button id="preview-button" class="waves-effect waves-light light-blue btn" name="preview">preview</button> 
+                                    <button id="preview-button" class="waves-effect waves-light light-blue disabled btn" name="preview">preview</button> 
                                 </div>
                             </div>
 			    <!--</form>-->
@@ -68,6 +68,7 @@
                             <div class="col s12">
                                 <h5>Preview</h5>
                                 <p>The output image will display here:</p>
+                                <p class="red-text">Preview is temporarily unavailable</p>
                             </div>
                         </div>
                         <div class="row">
@@ -78,7 +79,7 @@
                         </div>
                         <div class="row">
                             <div class="col s12">
-                                <button id="upload-button" onclick="M.toast({html: 'Submitting...'})" class="btn disabled">upload</a>
+                                <button id="upload-button" onclick="M.toast({html: 'Submitting...'})" class="btn">upload</a>
                             </div>
                         </div>
                 </div>
