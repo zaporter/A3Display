@@ -1,3 +1,5 @@
+import sys
+from PIL import Image
 LED_ROWS       = 12
 LED_COLS       = 25
 LED_COUNT      = LED_ROWS*LED_COLS
@@ -7,15 +9,26 @@ LED_DMA        = 10
 LED_BRIGHTNESS = 255
 LED_INVERT     = False
 LED_CHANNEL    = 0
-LED_ZERO = 278
+LED_ZERO       = 278
 
 def push(strip):
-    strip.show()
+    if (strip.previewMode):
+        strip.previewFrames.append(strip.previewImg.copy())
+        if (len(strip.previewFrames)/15.0 > strip.previewLength):
+            strip.previewFrames[0].save("preview.gif", format='GIF', append_images=strip.previewFrames[1:],save_all=True, duration=67)
+            sys.exit(0)
+    else:
+        strip.show()
 # Color is Color(R,G,B)
-def setPX(strip, x, y, color):
+def setPX(strip, x, y, colorTuple):
+    if (strip.previewMode):
+        # TODO figure out how to use pix[x,y] for performance reasons
+        strip.previewImg.putpixel((x,y), colorTuple)
+        return
     if (x>=LED_COLS or x<0 or y>=LED_ROWS or y<0):
         print('Invalid set. Outside of bounds')
     else:
+        color = Color(colorTuple[0], colorTuple[1], colorTuple[2])
         pixel = 0
         if (x==0):
             pixel = LED_ZERO+y
@@ -25,13 +38,13 @@ def setPX(strip, x, y, color):
             else:
                 pixel = LED_ZERO + 23 - y
         elif (x%2==0 and x<=5):
-            pixel = LED_ZERO - 3 -LED_ROWS*(x-2)- y
+            pixel = LED_ZERO - 3 - LED_ROWS*(x-2) - y
         elif (x%2==0 and x>5):
-            pixel = LED_ZERO - 2 -LED_ROWS*(x-1)+y
+            pixel = LED_ZERO - 2 - LED_ROWS*(x-1) + y
         elif (x%2==1 and x<6):
-            pixel = LED_ZERO - 3 - LED_ROWS*(x-1)+1 + y
+            pixel = LED_ZERO - 3 - LED_ROWS*(x-1) + 1 + y
         elif (x%2==1 and x>5):
-            pixel = LED_ZERO - 2 -LED_ROWS*(x-2)-1 -y
+            pixel = LED_ZERO - 2 - LED_ROWS*(x-2) - 1 -y
         strip.setPixelColor(pixel, color)
 
 def wipe(strip, color):

@@ -3,18 +3,20 @@
 
 
 from PIL import Image, ImageFont, ImageDraw
-from neopixel import *
 from basicDisp import *
 from a3time import *
 
+try:
+    from neopixel import *
+except ImportError:
+    pass
 
 
 def pushImage(strip, img):
     for x in range(LED_COLS):
         for y in range(LED_ROWS):
             col = img.getpixel((x,y))
-            color = Color(col[0],col[1],col[2])
-            setPX(strip,x,y,color)
+            setPX(strip,x,y,col)
     push(strip)
 
 def pushImageFile(strip, filename):
@@ -52,7 +54,7 @@ def scrollText(strip, img, text, font, colorRGB, wait_ms, scroll_no, loc=(0,0)):
             pushImage(strip,img)
             img = back_img.copy()
             draw = ImageDraw.Draw(img)
-            sleep_ms(wait_ms)
+            sleep_ms(strip,wait_ms)
 
 def drawBorder(img, color, justTop=False):
     draw = ImageDraw.Draw(img)
