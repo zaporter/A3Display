@@ -10,6 +10,7 @@ import argparse
 from basicDisp import *
 from animations import *
 from imageControl import *
+from idleDisp import *
 
 try:
     from neopixel import *
