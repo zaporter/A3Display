@@ -1,2 +1,2 @@
 while True:
-    displayTime(strip, 1000)
+    displayTime(wait_ms=10000)

@@ -12,19 +12,19 @@ except ImportError:
     pass
 
 
-def pushImage(strip, img):
+def pushImage(img):
     for x in range(LED_COLS):
         for y in range(LED_ROWS):
             col = img.getpixel((x,y))
-            setPX(strip,x,y,col)
-    push(strip)
+            setPX(x,y,col)
+    push()
 
-def pushImageFile(strip, filename):
+def pushImageFile( filename):
     print("Pushing image from file: "+filename)
     img = Image.open(filename)
-    pushImage(strip,img)
+    pushImage(img)
 
-def drawText(strip, img, text, font, colorRGB, loc=(0,0)):
+def drawText( img, text, font, colorRGB, loc=(0,0)):
     print("Drawing text: "+text);
     draw = ImageDraw.Draw(img)
     draw.text(loc,text,font=font, fill=colorRGB)
@@ -44,7 +44,7 @@ def isEquivImg(img1, img2):
     return (findFirstDiff(img1,img2) == (-1,-1))
 
 
-def scrollText(strip, img, text, font, colorRGB, wait_ms, scroll_no, loc=(0,0)):
+def scrollText( img, text, font, colorRGB, wait_ms, scroll_no, loc=(0,0)):
     print("Scrolling text: "+text)
     back_img = img.copy()
     draw = ImageDraw.Draw(img)
@@ -62,8 +62,8 @@ def scrollText(strip, img, text, font, colorRGB, wait_ms, scroll_no, loc=(0,0)):
     
     for i in range(scroll_no):
         for pos in range(size[0]+LED_COLS):
-            pushImage(strip, frames[pos])
-            sleep_ms(strip,wait_ms)
+            pushImage(frames[pos])
+            sleep_ms(wait_ms)
 
 def drawBorder(img, color, justTop=False):
     draw = ImageDraw.Draw(img)
@@ -78,7 +78,7 @@ def displayText(strip, text, text_color, bg_color, speed):
     """Renders scrolling text in helvetic font with a given bg and text color (R, G, B) and a given update speed"""
     font = ImageFont.truetype("fonts/helvetica.ttf", 14)
     image = Image.new('RGB',(LED_COLS,LED_ROWS),color=bg_color)
-    scrollText(strip, image, text.upper(), font, text_color, speed, 200000, loc=(0,1))
+    scrollText( image, text.upper(), font, text_color, speed, 2000000, loc=(0,1))
 
 
 

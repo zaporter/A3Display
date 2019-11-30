@@ -17,11 +17,11 @@ try:
 except ImportError:
     pass
 
-def runDisplay(strip, filename):
-    f = open(filename, "r")
-    command = f.read();
-    ikf = locals()
-    exec(command,globals(),locals())
+
+def runDisplay(strip, filename_a3d):
+    f_a3d = open(filename_a3d, "r")
+    command_a3d = f_a3d.read();
+    exec(command_a3d,globals(),locals())
 
 if __name__ == '__main__':
     print("Starting!")
@@ -31,6 +31,7 @@ if __name__ == '__main__':
     parser.add_argument("-p","--prev", action="store_true", help="preview")
     parser.add_argument("-l", "--length", action="store", type=int, help="Set length of preview in seconds")
     parser.add_argument("-f","--file", action="store", type=str, help="code file")
+    parser.add_argument("-o","--output", action="store", type=str, help="Location to save preview")
     parser = parser.parse_args()
     if (parser.run):
         print("Running")
@@ -42,7 +43,6 @@ if __name__ == '__main__':
         print("No mode set. Assuming run")
         run = True
     # Insanity. 
-    strip= type('strip', (object,), {})()
     if run:
         strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
         strip.begin()
@@ -53,6 +53,7 @@ if __name__ == '__main__':
         strip.previewImg = Image.new('RGB', (LED_COLS, LED_ROWS), (0,0,0))
         strip.previewFrames = []
         strip.previewLength = parser.length
+        strip.previewFile = parser.output
     if(parser.file):
         runDisplay(strip, parser.file)
     else:

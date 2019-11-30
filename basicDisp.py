@@ -11,16 +11,18 @@ LED_INVERT     = False
 LED_CHANNEL    = 0
 LED_ZERO       = 278
 
-def push(strip):
+strip= type('strip', (object,), {})()
+
+def push():
     if (strip.previewMode):
         strip.previewFrames.append(strip.previewImg.copy())
         if (len(strip.previewFrames)/15.0 > strip.previewLength):
-            strip.previewFrames[0].save("preview.gif", format='GIF', append_images=strip.previewFrames[1:],save_all=True, duration=67)
+            strip.previewFrames[0].save(strip.previewFile, format='GIF', append_images=strip.previewFrames[1:],save_all=True, duration=67)
             sys.exit(0)
     else:
         strip.show()
 # Color is Color(R,G,B)
-def setPX(strip, x, y, colorTuple):
+def setPX(x, y, colorTuple):
     if (strip.previewMode):
         # TODO figure out how to use pix[x,y] for performance reasons
         strip.previewImg.putpixel((x,y), colorTuple)
@@ -47,8 +49,8 @@ def setPX(strip, x, y, colorTuple):
             pixel = LED_ZERO - 2 - LED_ROWS*(x-2) - 1 -y
         strip.setPixelColor(pixel, color)
 
-def wipe(strip, color):
+def wipe(color):
     for x in range(LED_COLS):
         for y in range(LED_ROWS):
-            setPX(strip, x,y,color)
-    push(strip)
+            setPX( x,y,color)
+    push()
