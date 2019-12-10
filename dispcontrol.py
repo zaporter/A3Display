@@ -42,10 +42,9 @@ if __name__ == '__main__':
     else:
         print("No mode set. Assuming run")
         run = True
-    # Insanity. 
-    if run:
-        strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
-        strip.begin()
+    if (run):
+        strip.s = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
+        strip.s.begin()
         # Holy shit.. Python is insane
         strip.previewMode=False
     else:

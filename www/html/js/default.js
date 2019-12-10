@@ -7,7 +7,7 @@ $(document).ready(function(){
         	//, keyMap : "vim"
 	});
 
-	$.get('http://a3disp.dyn.wpi.edu/currentCode.txt',
+	$.get('http://a3disp.dyn.wpi.edu/currentcode.txt',
 		function(data) {
 			currentCode = data;
 			editor.setValue(currentCode);

@@ -1,5 +1,6 @@
 import sys
 from PIL import Image
+from neopixel import *
 LED_ROWS       = 12
 LED_COLS       = 25
 LED_COUNT      = LED_ROWS*LED_COLS
@@ -20,7 +21,7 @@ def push():
             strip.previewFrames[0].save(strip.previewFile, format='GIF', append_images=strip.previewFrames[1:],save_all=True, duration=67)
             sys.exit(0)
     else:
-        strip.show()
+        strip.s.show()
 # Color is Color(R,G,B)
 def setPX(x, y, colorTuple):
     if (strip.previewMode):
@@ -47,7 +48,7 @@ def setPX(x, y, colorTuple):
             pixel = LED_ZERO - 3 - LED_ROWS*(x-1) + 1 + y
         elif (x%2==1 and x>5):
             pixel = LED_ZERO - 2 - LED_ROWS*(x-2) - 1 -y
-        strip.setPixelColor(pixel, color)
+        strip.s.setPixelColor(pixel, color)
 
 def wipe(color):
     for x in range(LED_COLS):

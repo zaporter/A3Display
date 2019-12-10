@@ -48,18 +48,18 @@ def scrollText( img, text, font, colorRGB, wait_ms, scroll_no, loc=(0,0)):
     print("Scrolling text: "+text)
     back_img = img.copy()
     draw = ImageDraw.Draw(img)
-    draw.text(loc,text,font=font,fill=colorRGB)
     size= draw.textsize(text,font)
     frames=[]
     scroll_loc=(LED_COLS,loc[1])
     
     for pos in range(size[0]+LED_COLS):
+        print(str(pos)+"/"+str(size[0]+LED_COLS))
         draw.text(scroll_loc,text,font=font,fill=colorRGB)
         scroll_loc=(scroll_loc[0]-1,scroll_loc[1])
         frames.append(img)
         img = back_img.copy()
         draw = ImageDraw.Draw(img)
-    
+    print("render complete")
     for i in range(scroll_no):
         for pos in range(size[0]+LED_COLS):
             pushImage(frames[pos])
@@ -73,7 +73,7 @@ def drawBorder(img, color, justTop=False):
         draw.line((0,0,0,LED_ROWS-1),fill=color)
         draw.line((LED_COLS-1,0,LED_COLS-1,LED_ROWS-1),fill=color)
 
-def displayText(strip, text, text_color, bg_color, speed):
+def displayText(text, text_color, bg_color, speed):
     print("Displaying text: "+text)
     """Renders scrolling text in helvetic font with a given bg and text color (R, G, B) and a given update speed"""
     font = ImageFont.truetype("fonts/helvetica.ttf", 14)
