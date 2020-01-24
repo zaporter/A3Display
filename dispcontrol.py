@@ -47,6 +47,7 @@ if __name__ == '__main__':
         strip.s.begin()
         # Holy shit.. Python is insane
         strip.previewMode=False
+        strip.previewImg = Image.new('RGB', (LED_COLS, LED_ROWS), (0,0,0))
     else:
         strip.previewMode=True
         strip.previewImg = Image.new('RGB', (LED_COLS, LED_ROWS), (0,0,0))

@@ -1,6 +1,10 @@
 import sys
 from PIL import Image
-from neopixel import *
+try:
+    from neopixel import *
+except ImportError:
+    pass
+
 LED_ROWS       = 12
 LED_COLS       = 25
 LED_COUNT      = LED_ROWS*LED_COLS
@@ -11,6 +15,8 @@ LED_BRIGHTNESS = 255
 LED_INVERT     = False
 LED_CHANNEL    = 0
 LED_ZERO       = 278
+
+stripColorMap=[[(0,0,0)]*LED_ROWS]*LED_COLS
 
 strip= type('strip', (object,), {})()
 
@@ -24,13 +30,11 @@ def push():
         strip.s.show()
 # Color is Color(R,G,B)
 def setPX(x, y, colorTuple):
-    if (strip.previewMode):
-        # TODO figure out how to use pix[x,y] for performance reasons
-        strip.previewImg.putpixel((x,y), colorTuple)
-        return
     if (x>=LED_COLS or x<0 or y>=LED_ROWS or y<0):
-        print('Invalid set. Outside of bounds')
-    else:
+      #  print('Invalid set. Outside of bounds')
+        return False
+    strip.previewImg.putpixel((x,y), colorTuple)
+    if (not strip.previewMode):
         color = Color(colorTuple[0], colorTuple[1], colorTuple[2])
         pixel = 0
         if (x==0):
@@ -49,6 +53,11 @@ def setPX(x, y, colorTuple):
         elif (x%2==1 and x>5):
             pixel = LED_ZERO - 2 - LED_ROWS*(x-2) - 1 -y
         strip.s.setPixelColor(pixel, color)
+    return True
+
+def getPX(x,y):
+    return strip.previewImg.getpixel((x,y))
+
 
 def wipe(color):
     for x in range(LED_COLS):
