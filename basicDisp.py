@@ -15,6 +15,7 @@ LED_BRIGHTNESS = 255
 LED_INVERT     = False
 LED_CHANNEL    = 0
 LED_ZERO       = 278
+GAME_FILE      = "/home/pi/commandqueue.txt"
 
 stripColorMap=[[(0,0,0)]*LED_ROWS]*LED_COLS
 

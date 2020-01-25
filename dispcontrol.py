@@ -11,6 +11,7 @@ from basicDisp import *
 from animations import *
 from imageControl import *
 from idleDisp import *
+from game import *
 
 try:
     from neopixel import *
