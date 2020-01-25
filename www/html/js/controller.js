@@ -1,4 +1,4 @@
-var el = document.getElementByTagName("canvas")[0];
+var el = document.getElementById("myCanvas")[0];
 el.addEventListener("touchstart", handleStart);
 el.addEventListener("touchmove", handleMove);
 el.addEventListener("touchend", handleEnd);
