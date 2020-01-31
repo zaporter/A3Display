@@ -36,30 +36,24 @@
 
         htmlCanvas.addEventListener("touchend", function (e) {
             var mouseEvent = new MouseEvent("mouseup", {});
+            var redrawAction = true;
+            var redrawDpad = true;
             var i;
             
-            if (lastMove.touches[lastMove.touches.length - 1].clientX > window.innerWidth/2) {
-                console.log("Redrawing action");
-                drawAction();
-            }
-            else {
-                console.log("Redrawing dpad");
-                drawDpad();
-            }
-             
-            /*
             for (i = 0; i < lastMove.touches.length; i++) {
-                console.log(i);
-                if (lastMove.touches[i].clientX > window.innerWidth/2) {
-                    console.log("Redrawing action");
-                    drawAction();
-                }
+
+                if (lastMove.touches[i].clientX < window.innerWidth/2) {
+                    redrawAction = false;
+               }
                 else {
-                    console.log("Redrawing dpad");
-                    drawDpad();
+                    redrawDpad = false;
                 }
             }
-            */
+
+            console.log(redrawAction);
+            console.log(redrawDpad);
+            if (redrawAction) { drawAction(); }
+            if (redrawDpad) { drawDpad(); }
             htmlCanvas.dispatchEvent(mouseEvent);
         }, false);
 
