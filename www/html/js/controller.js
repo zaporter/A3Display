@@ -297,7 +297,6 @@ $(document).ready(function(){
 
     function pressRight() {
         console.log("RIGHT");
-        console.log("LEFT");
         $.post("controller.php",
             {
               command: "R",
@@ -308,7 +307,6 @@ $(document).ready(function(){
 
     function pressAction() {
         console.log("ACTION");
-        console.log("LEFT");
         $.post("controller.php",
             {
               command: "A",
