@@ -272,7 +272,7 @@ $(document).ready(function(){
         $.post("controller.php",
             {
               command: "U",
-            },
+            }
         );
  
     }
@@ -282,8 +282,8 @@ $(document).ready(function(){
          $.post("controller.php",
             {
               command: "D",
-            },
-        )       
+            }
+        );       
     }
 
     function pressLeft() {
@@ -291,8 +291,8 @@ $(document).ready(function(){
         $.post("controller.php",
             {
               command: "L",
-            },
-        ) 
+            }
+        ); 
     }
 
     function pressRight() {
@@ -300,8 +300,8 @@ $(document).ready(function(){
         $.post("controller.php",
             {
               command: "R",
-            },
-        ) 
+            }
+        ); 
  
     }
 
@@ -310,8 +310,8 @@ $(document).ready(function(){
         $.post("controller.php",
             {
               command: "A",
-            },
-        )
+            }
+        );
     }
     // Runs each time the DOM window resize event fires.
     // Resets the canvas dimensions to match window,
