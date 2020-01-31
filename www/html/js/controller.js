@@ -31,7 +31,7 @@
         context.moveTo(0, 0);
         context.lineTo(window.innerWidth/4, window.innerHeight/2);
         context.lineTo(window.innerWidth / 2, 0);
-        context.fillStyle = "DarkRed";
+        context.fillStyle = "DarkGoldenRod";
         context.fill();
 
         //Insert Up forground
@@ -39,7 +39,7 @@
         context.moveTo(pad, 0);
         context.lineTo(window.innerWidth/4, window.innerHeight/2 - pad);
         context.lineTo(window.innerWidth / 2 - pad, 0);
-        context.fillStyle = "Red";
+        context.fillStyle = "Gold";
         context.fill();
         
         //Insert Up background
@@ -57,6 +57,39 @@
         context.lineTo(window.innerWidth / 2 - pad, window.innerHeight);
         context.fillStyle = "Green";
         context.fill();
+
+        //Insert Left background
+        context.beginPath();
+        context.moveTo(0, 0);
+        context.lineTo(window.innerWidth/4, window.innerHeight/2);
+        context.lineTo(0, window.innerHeight);
+        context.fillStyle = "DarkBlue";
+        context.fill();
+       
+        //Insert Left forground
+        context.beginPath();
+        context.moveTo(0, window.innerHeight + pad);
+        context.lineTo(window.innerWidth/4 - pad, window.innerHeight/2);
+        context.lineTo(0, window.innerHeight - pad);
+        context.fillStyle = "CornflowerBlue";
+        context.fill();
+
+        //Insert Right background
+        context.beginPath();
+        context.moveTo(window.innerWidth/2, 0);
+        context.lineTo(window.innerWidth/4, window.innerHeight/2);
+        context.lineTo(window.innerWidth/2, window.innerHeight);
+        context.fillStyle = "DarkRed";
+        context.fill();
+       
+        //Insert Right forground
+        context.beginPath();
+        context.moveTo(window.innerWidth/2, pad);
+        context.lineTo(window.innerWidth/4 + pad, window.innerHeight/2);
+        context.lineTo(window.innerWidth/2, window.innerHeight - pad);
+        context.fillStyle = "Red";
+        context.fill();
+
 
         
 /*
