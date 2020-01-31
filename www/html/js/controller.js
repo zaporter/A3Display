@@ -68,7 +68,7 @@
        
         //Insert Left forground
         context.beginPath();
-        context.moveTo(0, window.innerHeight + pad);
+        context.moveTo(0, pad);
         context.lineTo(window.innerWidth/4 - pad, window.innerHeight/2);
         context.lineTo(0, window.innerHeight - pad);
         context.fillStyle = "CornflowerBlue";
