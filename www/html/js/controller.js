@@ -9,11 +9,39 @@
     initialize();
 
     function initialize() {
-       // Register an event listener to call the resizeCanvas() function 
-       // each time the window is resized.
-       window.addEventListener('resize', resizeCanvas, false);
-       // Draw canvas border for the first time.
-       resizeCanvas();
+        // Register an event listener to call the resizeCanvas() function 
+        // each time the window is resized.
+        window.addEventListener('resize', resizeCanvas, false);
+        
+        // Draw canvas border for the first time.
+        resizeCanvas();
+
+        // Create handlers for screen touches
+        htmlCanvas.addEventListener("touchstart" function (e) {
+            mousePos = getTouchPos(htmlCanvas, e);
+            var touch = e.touches[0];
+            var mouseEvent = new MouseEvent("mousedown", {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            console.log("Touch detected");
+            console.log(mouseEvent);
+            htmlCanvas.dispatchEvent(mouseEvent);
+        }, false);
+
+        htmlCanvas.addEventListener("touchend", function (e) {
+            var mouseEvent = new MouseEvent("mouseup", {});
+            htmlCanvas.dispatchEvent(mouseEvent);
+        }, false);
+
+        htmlCanvas.addEventListener("touchmove", function (e) {
+            var touch = e.touches[0];
+            var mouseEvent = new MouseEvent("mousemove", {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            htmlCanvas.dispatchEvent(mouseEvent);
+        }, false);
 
     }
 
@@ -89,8 +117,6 @@
         context.lineTo(window.innerWidth/2, window.innerHeight - pad);
         context.fillStyle = "Red";
         context.fill();
-
-
         
 /*
         context.moveTo(window.innerWidth / 2, 0);
