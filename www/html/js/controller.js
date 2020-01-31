@@ -25,9 +25,15 @@
         context.strokeRect(0, 0, window.innerWidth, window.innerHeight);
 
         context.beginPath();
+        context.moveTo(0,0);
+        context.moveTo(50, 0);
+        context.moveTo(50, 50);
+
+        /*
         context.moveTo(window.innerWidth/2, 0);
         context.moveTo(3*window.innerWidth/4, window.innerHeight/2);
         context.moveTo(window.innerWidth, 0);
+        */
         context.fillStyle = "DarkRed";
         context.fill()
 /*
