@@ -20,9 +20,11 @@
     // Display custom canvas. In this case it's a blue, 5 pixel 
     // border that resizes along with the browser window.
     function redraw() {
+        /*
         context.strokeStyle = 'black';
         context.lineWidth = '5';
         context.strokeRect(0, 0, window.innerWidth, window.innerHeight);
+        */
 
         context.beginPath();
         context.moveTo(0,0);
