@@ -72,6 +72,9 @@
         else if (checkInTriangle(mouseEvent.clientX, mouseEvent.clientY, window.innerWidth/2, 0, window.innerWidth/2, window.innerHeight, window.innerWidth/4, window.innerHeight/2)) {
             overlayRight();
         }
+        else if (mouseEvent.clientX > window.innerWidth/2) {
+            overlayAction();
+        }
 
         //Check if point is in down triangle
         //Check if point is in left triangle
@@ -96,10 +99,6 @@
     // Display custom canvas. In this case it's a blue, 5 pixel 
     // border that resizes along with the browser window.
     function redraw() {
-        context.strokeStyle = 'black';
-        context.lineWidth = '5';
-        context.strokeRect(0, 0, window.innerWidth, window.innerHeight);
-
         var pad = 10
 
         //Insert Up background
@@ -174,6 +173,25 @@
         //context.fillStyle = "Red";
         context.fill();
         
+        //Insert action background
+        context.beginPath();
+        context.fillStyle = "black";
+        context.fillRect(window.innerWidth/2, 0, window.innerWidth/2, window.innerHeight);
+        context.closePath();
+
+        //Insert action foreground
+        context.beginPath();
+        context.fillStyle = "DarkSlateGray";
+        context.fillRect(window.innerWidth/2 + pad, pad, window.innerWidth/2 - 2*pad , window.innerHeight - 2*pad);
+        context.closePath();
+
+    }
+
+    function overlayAction() {
+        context.beginPath();
+        context.fillStyle = "black";
+        context.fillRect(window.innerWidth/2, 0, window.innerWidth/2, window.innerHeight);
+        context.closePath();
     }
 
     function overlayRight() {
