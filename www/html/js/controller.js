@@ -24,13 +24,13 @@
                 clientX: touch.clientX,
                 clientY: touch.clientY
             });
-            document.getElementByIt("test").innerHTML = "Touched!";
+            document.getElementById("test").innerHTML = "Touched!";
             htmlCanvas.dispatchEvent(mouseEvent);
         }, false);
 
         htmlCanvas.addEventListener("touchend", function (e) {
             var mouseEvent = new MouseEvent("mouseup", {});
-            document.getElementByIt("info").innerHTML = "not touched";
+            document.getElementById("info").innerHTML = "not touched";
             htmlCanvas.dispatchEvent(mouseEvent);
         }, false);
 
