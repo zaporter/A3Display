@@ -16,10 +16,13 @@
         // Draw canvas border for the first time.
         resizeCanvas();
 
+        var currentTouches;
+
         // Create handlers for screen touches
         htmlCanvas.addEventListener("touchstart", function (e) {
             mousePos = getTouchPos(htmlCanvas, e);
             var i;
+            currentTouches = e.touches;
             for (i = 0; i < e.touches.length; i++) {
                 var touch = e.touches[i];
                 var mouseEvent = new MouseEvent("mousedown", {
@@ -35,16 +38,13 @@
 
         htmlCanvas.addEventListener("touchend", function (e) {
             var mouseEvent = new MouseEvent("mouseup", {});
-            if (typeof e.touches == 'undefined') {
+            if (typeof currentTouches == 'undefined') {
                 var i;
-                for (i = 0; i < e.touches.length; i++)
-                    console.log(e.touches[0].clientX);
-                    if (e.touches[i].clientX > window.innerWidth/2) {
-                        console.log("Trying to redraw button");
+                for (i = 0; i < currentTouches.length; i++)
+                    if (currentTouches[i].clientX > window.innerWidth/2) {
                         drawAction();
                     }
                     else {
-                        console.log("Trying to redraw dpad");
                         drawDpad();
                     }
             }
