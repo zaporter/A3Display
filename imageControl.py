@@ -2,7 +2,7 @@
 # Author: Jake Roller
 
 
-from PIL import Image, ImageFont, ImageDraw
+from PIL import Image, ImageFont, ImageDraw, ImageOps, ImageSequence
 from basicDisp import *
 from a3time import *
 
@@ -11,8 +11,12 @@ try:
 except ImportError:
     pass
 
+def resizeImage(img):
+    img.thumbnail((LED_COLS+1,LED_ROWS+1))
 
 def pushImage(img):
+#    resizeImage(img)
+    img.thumbnail((LED_COLS+8,LED_ROWS+8),Image.ANTIALIAS)
     for x in range(LED_COLS):
         for y in range(LED_ROWS):
             col = img.getpixel((x,y))
@@ -23,6 +27,11 @@ def pushImageFile( filename):
     print("Pushing image from file: "+filename)
     img = Image.open(filename)
     pushImage(img)
+
+def pushGIFFile(filename):
+    im = Image.open(filename)
+    for frame in ImageSequence.Iterator(im):
+            pushImage(frame)
 
 def drawText( img, text, font, colorRGB, loc=(0,0)):
     print("Drawing text: "+text);
