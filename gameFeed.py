@@ -2,21 +2,21 @@ import time
 from basicDisp import *
 
 
-def game_clear():
-    fp = open(GAME_FILE, 'w')
+def game_clear(input_file):
+    fp = open(input_file, 'w')
     fp.close();
 
 
-def game_popCommand():
-    rp = open(GAME_FILE, 'r')
+def game_popCommand(input_file):
+    rp = open(input_file, 'r')
     lines = rp.readlines()
     rp.close()
-    fp = open(GAME_FILE,'w+')
+    fp = open(input_file,'w+')
     if (len(lines)==0):
         return ""
     for x in range(len(lines)-1):
-        fp.write(lines[x])
+        fp.write(lines[x+1])
     fp.close()
-    return lines[len(lines)-1].rstrip("\n\r")
+    return lines[0].rstrip("\n\r")
 
 

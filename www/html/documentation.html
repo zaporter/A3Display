@@ -30,42 +30,42 @@
         <main>
             <div class="container">
                 <div class="section">
-                    <h4>The Board</h4>
+                    <h3>The Board</h3>
 					<p>This is the doc page for the Stodd A3 LED board web interface. Here you can find information on how to interact with the board and put your own cool stuff up there. If you want to post code to the board, you must talk to one of the creators for the passphrase. Once you have that, you can write code in the box on the home page and submit it. Below are some basic commands that you can run to demo some of the board's functionality. We will be adding more as we go. If you want to get deeper in developing an app or script, jump over to our <a href="www.github.com">Github</a> to view the API for interacting with the board.  </p>
                 </div>
             </div>
 
             <div class="container">
                 <div class="section">
-                    <h4>Writing Text</h4>
-					<h2>displayText(string text, rgb text_color, rgb bg_color, int speed)</h2>
+                    <h3>Writing Text</h3>
+					<h5>displayText(string text, rgb text_color, rgb bg_color, int speed)</h5>
                     <p>This is the simplest interface for writing text to the board. RGB values are defined as a tuple with 3 values 0-255 (e.g. (124, 200, 255)). This function will scroll the given text from right to left across the screen. You need to pass the text color and background color, as well as a speed (refresh rate) a good speed to start is 10.</p>
-					<h2>dropText(image img, string text, string font, int wait_ms, int scroll_no)</h2>
+					<h5>dropText(image img, string text, string font, int wait_ms, int scroll_no)</h5>
                 </div>
             </div>
 
             <div class="container">
                 <div class="section">
-                    <h4>Images</h4>
-					<h2>pushImage(file filename)</h2>
+                    <h3>Images</h3>
+					<h5>pushImage(file filename)</h5>
 					<p>As long as the file exists in the A3Disp directory on the pi, you can display an image on the board with this function.
-					<h2>pushGIFFile(file filename)</h2>
+					<h5>pushGIFFile(file filename)</h5>
 					<p>Same goes for this function, except you can display GIF formats.</p>
                 </div>
             </div>
             
             <div class="container">
                 <div class="section">
-                    <h4>Controlling Pixels</h4>
-					<h2></h2>
+                    <h3>Controlling Pixels</h3>
+					<h3></h3>
                     <p>place</p>
                 </div>
             </div>
 
 			<div class="container">
                 <div class="section">
-                    <h4>Interactions</h4>
-					<h2>startSnake()</h2>
+                    <h3>Interactions</h3>
+					<h5>startSnake()</h5>
                     <p>Run this command and open up the controller on the website to play a game of snake! More games coming soon...</p>
 				</div>
             </div>
@@ -73,7 +73,7 @@
 
 			<div class="container">
                 <div class="section">
-                    <h4>Developing for the Board</h4>
+                    <h3>Developing for the Board</h3>
 					<p>Have a great idea? Talk to one of the board creators about having your app or API implemented onto the board directly!</p>
                 </div>
             </div>

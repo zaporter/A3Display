@@ -145,7 +145,7 @@ $(document).ready(function(){
         context.moveTo(pad, 0);
         context.lineTo(window.innerWidth/4, window.innerHeight/2 - pad);
         context.lineTo(window.innerWidth / 2 - pad, 0);
-        context.fillStyle = "DarkSlateGray";
+        context.fillStyle = "LightBlue";
         //context.fillStyle = "Gold";
         context.fill();
         
@@ -163,7 +163,7 @@ $(document).ready(function(){
         context.moveTo(pad, window.innerHeight);
         context.lineTo(window.innerWidth/4, window.innerHeight/2 + pad);
         context.lineTo(window.innerWidth / 2 - pad, window.innerHeight);
-        context.fillStyle = "DarkSlateGray";
+        context.fillStyle = "LightBlue";
         //context.fillStyle = "Green";
         context.fill();
 
@@ -181,7 +181,7 @@ $(document).ready(function(){
         context.moveTo(0, pad);
         context.lineTo(window.innerWidth/4 - pad, window.innerHeight/2);
         context.lineTo(0, window.innerHeight - pad);
-        context.fillStyle = "DarkSlateGray";
+        context.fillStyle = "LightBlue";
         //context.fillStyle = "CornflowerBlue";
         context.fill();
 
@@ -199,7 +199,7 @@ $(document).ready(function(){
         context.moveTo(window.innerWidth/2, pad);
         context.lineTo(window.innerWidth/4 + pad, window.innerHeight/2);
         context.lineTo(window.innerWidth/2, window.innerHeight - pad);
-        context.fillStyle = "DarkSlateGray";
+        context.fillStyle = "LightBlue";
         //context.fillStyle = "Red";
         context.fill();
     }
@@ -216,7 +216,7 @@ $(document).ready(function(){
 
         //Insert action foreground
         context.beginPath();
-        context.fillStyle = "DarkSlateGray";
+        context.fillStyle = "LightBlue";
         context.fillRect(window.innerWidth/2 + pad, pad, window.innerWidth/2 - 2*pad , window.innerHeight - 2*pad);
         context.closePath();
     }
@@ -270,7 +270,7 @@ $(document).ready(function(){
 
     function pressUp() {
         console.log("UP");
-        $.post("controller.php",
+        $.post("controller2.php",
             {
               command: "U\n",
             }
@@ -280,7 +280,7 @@ $(document).ready(function(){
 
     function pressDown() {
         console.log("DOWN");
-         $.post("controller.php",
+         $.post("controller2.php",
             {
               command: "D\n",
             }
@@ -289,7 +289,7 @@ $(document).ready(function(){
 
     function pressLeft() {
         console.log("LEFT");
-        $.post("controller.php",
+        $.post("controller2.php",
             {
               command: "L\n",
             }
@@ -298,17 +298,16 @@ $(document).ready(function(){
 
     function pressRight() {
         console.log("RIGHT");
-        $.post("controller.php",
+        $.post("controller2.php",
             {
               command: "R\n",
             }
         ); 
- 
     }
 
     function pressAction() {
         console.log("ACTION");
-        $.post("controller.php",
+        $.post("controller2.php",
             {
               command: "T\n",
             }
