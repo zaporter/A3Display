@@ -1,3 +1,4 @@
+// Dev: Ted Clifford (c) 1.31.20 
 $(document).ready(function(){
 
 	var code = $(".codemirror-textarea")[0];
