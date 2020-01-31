@@ -25,6 +25,7 @@
                 clientY: touch.clientY
             });
             document.getElementById("test").innerHTML = "Touched!";
+            pickSector(mouseEvent);
             console.log(mouseEvent.clientX);
             console.log(mouseEvent.clientY);
             htmlCanvas.dispatchEvent(mouseEvent);
@@ -33,6 +34,7 @@
         htmlCanvas.addEventListener("touchend", function (e) {
             var mouseEvent = new MouseEvent("mouseup", {});
             document.getElementById("test").innerHTML = "not touched";
+            redraw();
             htmlCanvas.dispatchEvent(mouseEvent);
         }, false);
 
@@ -56,6 +58,43 @@
         };
     }
 
+    function pickSector(mouseEvent) {
+        //Check if point is in up triangle
+        if (checkInTriangle(mouseEvent.clientX, mouseEvent.clientY, 0, 0, window.innerWidth/2, 0, window.innerWidth/4, window.innerHeight/2)) {
+            overlayUp();
+        }
+        //Check if point is in down triangle
+        else if (checkInTriangle(mouseEvent.clientX, mouseEvent.clientY, 0, window.innerHeight, window.innerWidth/2, window.innerHeight, window.innerWidth/4, window.innerHeight/2)) {
+            overlayDown();
+        }
+        //Check if point is in left triangle
+        else if (checkInTriangle(mouseEvent.clientX, mouseEvent.clientY, 0, 0, 0, window.innerHeight, window.innerWidth/4, window.innerHeight/2)) {
+            overlayLeft();
+        }
+        else if (checkInTriangle(mouseEvent.clientX, mouseEvent.clientY, window.innerWidth/2, 0, window.innerWidth/2, window.innerHeight, window.innerWidth/4, window.innerHeight/2)) {
+            overlayRight();
+        }
+
+        //Check if point is in down triangle
+        //Check if point is in left triangle
+        //Check if point is in right triangle
+    }
+
+    function checkInTriangle(x, y, x1, y1, x2, y2, x3, y3) {
+        var A = area(x1, y1, x2, y2, x3, y3);
+        var A1 = area(x, y, x2, y2, x3, y3);
+        var A2 = area(x1, y1, x, y, x3, y3);
+        var A3 = area(x1, y1, x2, y2, x, y);
+
+        return (A1 + A2 + A3 == A);
+    }
+
+
+    // Returns the area of a given triangle of three points
+    function area(x1, y1, x2 , y2, x3, y3) {
+        return Math.abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2.0);
+    }
+
     // Display custom canvas. In this case it's a blue, 5 pixel 
     // border that resizes along with the browser window.
     function redraw() {
@@ -70,7 +109,8 @@
         context.moveTo(0, 0);
         context.lineTo(window.innerWidth/4, window.innerHeight/2);
         context.lineTo(window.innerWidth / 2, 0);
-        context.fillStyle = "DarkGoldenRod";
+        context.fillStyle = "yellow"
+        //context.fillStyle = "DarkGoldenRod";
         context.fill();
 
         //Insert Up forground
@@ -78,15 +118,17 @@
         context.moveTo(pad, 0);
         context.lineTo(window.innerWidth/4, window.innerHeight/2 - pad);
         context.lineTo(window.innerWidth / 2 - pad, 0);
-        context.fillStyle = "Gold";
+        context.fillStyle = "DarkSlateGray";
+        //context.fillStyle = "Gold";
         context.fill();
         
-        //Insert Up background
+        //Insert Down background
         context.beginPath();
         context.moveTo(0, window.innerHeight);
         context.lineTo(window.innerWidth/4, window.innerHeight/2);
         context.lineTo(window.innerWidth / 2, window.innerHeight);
-        context.fillStyle = "DarkGreen";
+        context.fillStyle = "LawnGreen";
+        //context.fillStyle = "DarkGreen";
         context.fill();
        
         //Insert Down forground
@@ -94,7 +136,8 @@
         context.moveTo(pad, window.innerHeight);
         context.lineTo(window.innerWidth/4, window.innerHeight/2 + pad);
         context.lineTo(window.innerWidth / 2 - pad, window.innerHeight);
-        context.fillStyle = "Green";
+        context.fillStyle = "DarkSlateGray";
+        //context.fillStyle = "Green";
         context.fill();
 
         //Insert Left background
@@ -102,7 +145,8 @@
         context.moveTo(0, 0);
         context.lineTo(window.innerWidth/4, window.innerHeight/2);
         context.lineTo(0, window.innerHeight);
-        context.fillStyle = "DarkBlue";
+        context.fillStyle = "CornFlowerBlue";
+        //context.fillStyle = "DarkBlue";
         context.fill();
        
         //Insert Left forground
@@ -110,7 +154,8 @@
         context.moveTo(0, pad);
         context.lineTo(window.innerWidth/4 - pad, window.innerHeight/2);
         context.lineTo(0, window.innerHeight - pad);
-        context.fillStyle = "CornflowerBlue";
+        context.fillStyle = "DarkSlateGray";
+        //context.fillStyle = "CornflowerBlue";
         context.fill();
 
         //Insert Right background
@@ -118,7 +163,8 @@
         context.moveTo(window.innerWidth/2, 0);
         context.lineTo(window.innerWidth/4, window.innerHeight/2);
         context.lineTo(window.innerWidth/2, window.innerHeight);
-        context.fillStyle = "DarkRed";
+        context.fillStyle = "Red";
+        //context.fillStyle = "DarkRed";
         context.fill();
        
         //Insert Right forground
@@ -126,23 +172,52 @@
         context.moveTo(window.innerWidth/2, pad);
         context.lineTo(window.innerWidth/4 + pad, window.innerHeight/2);
         context.lineTo(window.innerWidth/2, window.innerHeight - pad);
-        context.fillStyle = "Red";
+        context.fillStyle = "DarkSlateGray";
+        //context.fillStyle = "Red";
         context.fill();
         
-/*
-        context.moveTo(window.innerWidth / 2, 0);
-        context.lineTo(window.innerWidth, window.innerHeight);
-        context.stroke();
-
-        context.moveTo(window.innerWidth / 2, window.innerHeight);
-        context.lineTo(window.innerWidth, 0);
-        context.stroke();
-
-        context.moveTo(window.innerWidth / 2, 0);
-        context.lineTo(window.innerWidth / 2, window.innerHeight);       
-        context.stroke();
-*/
     }
+
+    function overlayRight() {
+        context.beginPath();
+        context.moveTo(window.innerWidth/2, 0);
+        context.lineTo(window.innerWidth/4, window.innerHeight/2);
+        context.lineTo(window.innerWidth/2, window.innerHeight);
+        context.fillStyle = "Red";
+        //context.fillStyle = "DarkRed";
+        context.fill();
+    }
+
+    function overlayLeft() {
+        context.beginPath();
+        context.moveTo(0, 0);
+        context.lineTo(window.innerWidth/4, window.innerHeight/2);
+        context.lineTo(0, window.innerHeight);
+        context.fillStyle = "CornFlowerBlue";
+        //context.fillStyle = "DarkBlue";
+        context.fill();
+    }
+
+    function overlayDown() {
+        context.beginPath();
+        context.moveTo(0, window.innerHeight);
+        context.lineTo(window.innerWidth/4, window.innerHeight/2);
+        context.lineTo(window.innerWidth / 2, window.innerHeight);
+        context.fillStyle = "LawnGreen";
+        //context.fillStyle = "DarkGreen";
+        context.fill();
+    }
+
+    function overlayUp() {
+        context.beginPath();
+        context.moveTo(0, 0);
+        context.lineTo(window.innerWidth/4, window.innerHeight/2);
+        context.lineTo(window.innerWidth / 2, 0);
+        context.fillStyle = "yellow"
+        //context.fillStyle = "DarkGoldenRod";
+        context.fill();
+    }
+
 
     // Runs each time the DOM window resize event fires.
     // Resets the canvas dimensions to match window,
@@ -153,10 +228,3 @@
         redraw();
     }
     })();
-/*
-var el = document.getElementById("myCanvas")[0];
-el.addEventListener("touchstart", handleStart);
-el.addEventListener("touchmove", handleMove);
-el.addEventListener("touchend", handleEnd);
-el.addEventListener("touchcancel", handleCancel);
-*/
