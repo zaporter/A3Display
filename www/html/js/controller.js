@@ -30,8 +30,6 @@
                     clientY: touch.clientY
                 });
                 pickSector(mouseEvent);
-                console.log(mouseEvent.clientX);
-                console.log(mouseEvent.clientY);
                 htmlCanvas.dispatchEvent(mouseEvent);
             }
         }, false);
@@ -39,14 +37,29 @@
         htmlCanvas.addEventListener("touchend", function (e) {
             var mouseEvent = new MouseEvent("mouseup", {});
             var i;
+            
+            if (lastMove.touches[lastMove.touches.length - 1].clientX > window.innerWidth/2) {
+                console.log("Redrawing action");
+                drawAction();
+            }
+            else {
+                console.log("Redrawing dpad");
+                drawDpad();
+            }
+             
+            /*
             for (i = 0; i < lastMove.touches.length; i++) {
+                console.log(i);
                 if (lastMove.touches[i].clientX > window.innerWidth/2) {
+                    console.log("Redrawing action");
                     drawAction();
                 }
                 else {
+                    console.log("Redrawing dpad");
                     drawDpad();
                 }
             }
+            */
             htmlCanvas.dispatchEvent(mouseEvent);
         }, false);
 
@@ -197,7 +210,6 @@
     // Reset the action button
     function drawAction() {
         var pad = 10;
-        console.log("Redrawing");
         
         //Insert action background
         context.beginPath();
