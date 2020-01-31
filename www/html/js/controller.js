@@ -47,7 +47,7 @@
 
     // Get the posiition of a touch relative to the canvas
     function getTouchPos(canvasDom, touchEvent) {
-        var rect = canvasDow.getBoundingClientRect();
+        var rect = canvasDom.getBoundingClientRect();
         return {
             x: touchEvent.touches[0].clientX - rect.left,
             y: touchEvent.touches[0].clientY - rect.top
