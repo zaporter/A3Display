@@ -27,6 +27,9 @@
             pickSector(mouseEvent);
             console.log(mouseEvent.clientX);
             console.log(mouseEvent.clientY);
+            if (e.touches.length > 1) {
+                document.getElementById("touch").innerHtml = "2 touch";
+            }
             htmlCanvas.dispatchEvent(mouseEvent);
         }, false);
 
