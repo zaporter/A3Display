@@ -24,12 +24,22 @@
         context.lineWidth = '5';
         context.strokeRect(0, 0, window.innerWidth, window.innerHeight);
 
+        //Insert Up background
         context.beginPath();
-        context.moveTo(window.innerWidth/2, 0);
-        context.lineTo(3*window.innerWidth/4, window.innerHeight/2);
-        context.lineTo(window.innerWidth, 0);
+        context.moveTo(0, 0);
+        context.lineTo(window.innerWidth/4, window.innerHeight/2);
+        context.lineTo(window.innerWidth / 2, 0);
         context.fillStyle = "DarkRed";
         context.fill();
+
+        //Insert Up forground
+        context.beginPath();
+        context.moveTo(2, 0);
+        context.lineTo(window.innerWidth/4, window.innerHeight/2 - 2);
+        context.lineTo(window.innerWidth / 2 - 2, 0);
+        context.fillStyle = "Red";
+        context.fill();
+
 /*
         context.moveTo(window.innerWidth / 2, 0);
         context.lineTo(window.innerWidth, window.innerHeight);
