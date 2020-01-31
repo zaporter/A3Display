@@ -24,8 +24,7 @@
                 clientX: touch.clientX,
                 clientY: touch.clientY
             });
-            console.log("Touch detected");
-            console.log(mouseEvent);
+            document.getElementByIt("info").innerHTML = "Touched!";
             htmlCanvas.dispatchEvent(mouseEvent);
         }, false);
 
