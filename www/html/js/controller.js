@@ -45,6 +45,15 @@
 
     }
 
+    // Get the posiition of a touch relative to the canvas
+    function getTouchPos(canvasDom, touchEvent) {
+        var rect = canvasDow.getBoundingClientRect();
+        return {
+            x: touchEvent.touches[0].clientX - rect.left,
+            y: touchEvent.touches[0].clientY - rect.top
+        };
+    }
+
     // Display custom canvas. In this case it's a blue, 5 pixel 
     // border that resizes along with the browser window.
     function redraw() {
