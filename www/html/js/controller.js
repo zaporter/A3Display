@@ -27,15 +27,12 @@
             pickSector(mouseEvent);
             console.log(mouseEvent.clientX);
             console.log(mouseEvent.clientY);
-            if (e.touches.length > 1) {
-                document.getElementById("touch").innerHTML = "2 touch";
-            }
             htmlCanvas.dispatchEvent(mouseEvent);
         }, false);
 
         htmlCanvas.addEventListener("touchend", function (e) {
             var mouseEvent = new MouseEvent("mouseup", {});
-            redraw();
+            //redraw();
             htmlCanvas.dispatchEvent(mouseEvent);
         }, false);
 
