@@ -1,4 +1,5 @@
-(function() {
+$(document).ready(function(){
+//(function() {
     var
     // Obtain a reference to the canvas element using its id.
     htmlCanvas = document.getElementById('myCanvas'),
@@ -12,7 +13,7 @@
         // Register an event listener to call the resizeCanvas() function 
         // each time the window is resized.
         window.addEventListener('resize', resizeCanvas, false);
-				
+                
         // Draw canvas border for the first time.
         resizeCanvas();
 
@@ -79,25 +80,29 @@
         //Check if point is in up triangle
         if (checkInTriangle(mouseEvent.clientX, mouseEvent.clientY, 0, 0, window.innerWidth/2, 0, window.innerWidth/4, window.innerHeight/2)) {
             overlayUp();
+            pressUp();
         }
         //Check if point is in down triangle
         else if (checkInTriangle(mouseEvent.clientX, mouseEvent.clientY, 0, window.innerHeight, window.innerWidth/2, window.innerHeight, window.innerWidth/4, window.innerHeight/2)) {
             overlayDown();
+            pressDown();
         }
         //Check if point is in left triangle
         else if (checkInTriangle(mouseEvent.clientX, mouseEvent.clientY, 0, 0, 0, window.innerHeight, window.innerWidth/4, window.innerHeight/2)) {
             overlayLeft();
+            pressLeft();
         }
+        //Check if point is in right triangle
         else if (checkInTriangle(mouseEvent.clientX, mouseEvent.clientY, window.innerWidth/2, 0, window.innerWidth/2, window.innerHeight, window.innerWidth/4, window.innerHeight/2)) {
             overlayRight();
+            pressRight();
         }
+        //Check if point is in action area
         else if (mouseEvent.clientX > window.innerWidth/2) {
             overlayAction();
+            pressAction(); 
         }
 
-        //Check if point is in down triangle
-        //Check if point is in left triangle
-        //Check if point is in right triangle
     }
 
     function checkInTriangle(x, y, x1, y1, x2, y2, x3, y3) {
@@ -262,7 +267,54 @@
         context.fill();
     }
 
+    function pressUp() {
+        console.log("UP");
+        $.post("controller.php",
+            {
+              command: "U",
+            },
+        );
+ 
+    }
 
+    function pressDown() {
+        console.log("DOWN");
+         $.post("controller.php",
+            {
+              command: "D",
+            },
+        )       
+    }
+
+    function pressLeft() {
+        console.log("LEFT");
+        $.post("controller.php",
+            {
+              command: "L",
+            },
+        ) 
+    }
+
+    function pressRight() {
+        console.log("RIGHT");
+        console.log("LEFT");
+        $.post("controller.php",
+            {
+              command: "R",
+            },
+        ) 
+ 
+    }
+
+    function pressAction() {
+        console.log("ACTION");
+        console.log("LEFT");
+        $.post("controller.php",
+            {
+              command: "A",
+            },
+        )
+    }
     // Runs each time the DOM window resize event fires.
     // Resets the canvas dimensions to match window,
     // then draws the new borders accordingly.
@@ -271,4 +323,5 @@
         htmlCanvas.height = window.innerHeight;
         redraw();
     }
-    })();
+    });
+//();
