@@ -19,15 +19,18 @@
         // Create handlers for screen touches
         htmlCanvas.addEventListener("touchstart", function (e) {
             mousePos = getTouchPos(htmlCanvas, e);
-            var touch = e.touches[0];
-            var mouseEvent = new MouseEvent("mousedown", {
-                clientX: touch.clientX,
-                clientY: touch.clientY
-            });
-            pickSector(mouseEvent);
-            console.log(mouseEvent.clientX);
-            console.log(mouseEvent.clientY);
-            htmlCanvas.dispatchEvent(mouseEvent);
+            var i;
+            for (i = 0; i < e.touches.length; i++) {
+                var touch = e.touches[i];
+                var mouseEvent = new MouseEvent("mousedown", {
+                    clientX: touch.clientX,
+                    clientY: touch.clientY
+                });
+                pickSector(mouseEvent);
+                console.log(mouseEvent.clientX);
+                console.log(mouseEvent.clientY);
+                htmlCanvas.dispatchEvent(mouseEvent);
+            }
         }, false);
 
         htmlCanvas.addEventListener("touchend", function (e) {
