@@ -17,7 +17,7 @@
         resizeCanvas();
 
         // Create handlers for screen touches
-        htmlCanvas.addEventListener("touchstart" function (e) {
+        htmlCanvas.addEventListener("touchstart", function (e) {
             mousePos = getTouchPos(htmlCanvas, e);
             var touch = e.touches[0];
             var mouseEvent = new MouseEvent("mousedown", {
