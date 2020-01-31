@@ -39,19 +39,16 @@
             var redrawAction = true;
             var redrawDpad = true;
             var i;
-            
-            for (i = 0; i < lastMove.touches.length; i++) {
-
-                if (lastMove.touches[i].clientX < window.innerWidth/2) {
+            for (i = 0; i < e.changedTouches.length; i++) {
+                console.log(e.changedTouches[i]);
+                if (e.changedTouches[i].clientX < window.innerWidth/2) {
                     redrawAction = false;
-               }
+                }
                 else {
                     redrawDpad = false;
                 }
             }
 
-            console.log(redrawAction);
-            console.log(redrawDpad);
             if (redrawAction) { drawAction(); }
             if (redrawDpad) { drawDpad(); }
             htmlCanvas.dispatchEvent(mouseEvent);
