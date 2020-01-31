@@ -25,6 +25,8 @@
                 clientY: touch.clientY
             });
             document.getElementById("test").innerHTML = "Touched!";
+            console.log(mouseEvent.clientX);
+            console.log(mouseEvent.clientY);
             htmlCanvas.dispatchEvent(mouseEvent);
         }, false);
 
