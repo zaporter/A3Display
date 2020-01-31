@@ -30,7 +30,7 @@
 
         htmlCanvas.addEventListener("touchend", function (e) {
             var mouseEvent = new MouseEvent("mouseup", {});
-            document.getElementById("info").innerHTML = "not touched";
+            document.getElementById("test").innerHTML = "not touched";
             htmlCanvas.dispatchEvent(mouseEvent);
         }, false);
 
