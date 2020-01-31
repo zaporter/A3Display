@@ -24,7 +24,6 @@
                 clientX: touch.clientX,
                 clientY: touch.clientY
             });
-            document.getElementById("test").innerHTML = "Touched!";
             pickSector(mouseEvent);
             console.log(mouseEvent.clientX);
             console.log(mouseEvent.clientY);
@@ -33,7 +32,6 @@
 
         htmlCanvas.addEventListener("touchend", function (e) {
             var mouseEvent = new MouseEvent("mouseup", {});
-            document.getElementById("test").innerHTML = "not touched";
             redraw();
             htmlCanvas.dispatchEvent(mouseEvent);
         }, false);
