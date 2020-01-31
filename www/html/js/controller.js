@@ -35,7 +35,22 @@
 
         htmlCanvas.addEventListener("touchend", function (e) {
             var mouseEvent = new MouseEvent("mouseup", {});
-            //redraw();
+            if (typeof e.touches == 'undefined') {
+                var i;
+                for (i = 0; i < e.touches.length; i++)
+                    console.log(e.touches[0].clientX);
+                    if (e.touches[i].clientX > window.innerWidth/2) {
+                        console.log("Trying to redraw button");
+                        drawAction();
+                    }
+                    else {
+                        console.log("Trying to redraw dpad");
+                        drawDpad();
+                    }
+            }
+            else {
+                redraw();
+            }
             htmlCanvas.dispatchEvent(mouseEvent);
         }, false);
 
@@ -99,9 +114,14 @@
         return Math.abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2.0);
     }
 
-    // Display custom canvas. In this case it's a blue, 5 pixel 
-    // border that resizes along with the browser window.
+    // Reset the entire screen
     function redraw() {
+        drawDpad();
+        drawAction();
+    }
+        
+    // Reset the directional pad
+    function drawDpad() {
         var pad = 10
 
         //Insert Up background
@@ -175,6 +195,12 @@
         context.fillStyle = "DarkSlateGray";
         //context.fillStyle = "Red";
         context.fill();
+    }
+
+    // Reset the action button
+    function drawAction() {
+        var pad = 10;
+        console.log("Redrawing");
         
         //Insert action background
         context.beginPath();
@@ -187,7 +213,6 @@
         context.fillStyle = "DarkSlateGray";
         context.fillRect(window.innerWidth/2 + pad, pad, window.innerWidth/2 - 2*pad , window.innerHeight - 2*pad);
         context.closePath();
-
     }
 
     function overlayAction() {
