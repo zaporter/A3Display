@@ -37,7 +37,7 @@
         context.moveTo(window.innerWidth, 0);
         */
         context.fillStyle = "DarkRed";
-        context.fill()
+        context.fill();
 /*
         context.moveTo(window.innerWidth / 2, 0);
         context.lineTo(window.innerWidth, window.innerHeight);
