@@ -15,7 +15,8 @@ LED_BRIGHTNESS = 255
 LED_INVERT     = False
 LED_CHANNEL    = 0
 LED_ZERO       = 278
-GAME_FILE      = "/home/pi/A3Display/www/html/controller_in.txt"
+GAME_INPUT1    = "/home/pi/A3Display/www/html/controller_in.txt"
+GAME_INPUT2    = "/home/pi/A3Display/www/html/controller2_in.txt"
 
 stripColorMap=[[(0,0,0)]*LED_ROWS]*LED_COLS
 
@@ -36,7 +37,11 @@ def setPX(x, y, colorTuple):
         return False
     strip.previewImg.putpixel((x,y), colorTuple)
     if (not strip.previewMode):
-        color = Color(colorTuple[0], colorTuple[1], colorTuple[2])
+        colorIn= [colorTuple[0],colorTuple[1],colorTuple[2]]
+        #for alpha in range(3):
+        #    while(colorIn[alpha]> 100):
+        #        colorIn[alpha]-=10
+        color = Color(colorIn[0], colorIn[1], colorIn[2])
         pixel = 0
         if (x==0):
             pixel = LED_ZERO+y
@@ -60,8 +65,9 @@ def getPX(x,y):
     return strip.previewImg.getpixel((x,y))
 
 
-def wipe(color):
+def wipe(color, clear=True):
     for x in range(LED_COLS):
         for y in range(LED_ROWS):
             setPX( x,y,color)
-    push()
+    if (clear):
+        push()

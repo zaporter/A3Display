@@ -16,10 +16,13 @@ def resizeImage(img):
 
 def pushImage(img):
 #    resizeImage(img)
-    img.thumbnail((LED_COLS+8,LED_ROWS+8),Image.ANTIALIAS)
+    img.thumbnail((LED_COLS,LED_ROWS),Image.ANTIALIAS)
     for x in range(LED_COLS):
         for y in range(LED_ROWS):
-            col = img.getpixel((x,y))
+            if (x<img.size[0] and y<img.size[1]):
+                col = img.getpixel((x,y))
+            else:
+                col = (0,0,0)
             setPX(x,y,col)
     push()
 
@@ -28,10 +31,26 @@ def pushImageFile( filename):
     img = Image.open(filename)
     pushImage(img)
 
-def pushGIFFile(filename):
-    im = Image.open(filename)
-    for frame in ImageSequence.Iterator(im):
-            pushImage(frame)
+def pushGIFFile(filename,loops=1,wait=50):
+    try:
+        im = Image.open(filename)
+    except IOError:
+        print("Cannot load: "+filename)
+        return
+    palette = im.getpalette()
+    for k in range(loops):
+        im.seek(0)
+        try:
+            while 1:
+                im.putpalette(palette)
+                new_im = Image.new("RGBA",im.size)
+                new_im.paste(im)
+                pushImage(new_im)
+                im.seek(im.tell()+1)
+                sleep_ms(wait)
+
+        except EOFError:
+            pass
 
 def drawText( img, text, font, colorRGB, loc=(0,0)):
     print("Drawing text: "+text);
