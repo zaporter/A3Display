@@ -52,6 +52,8 @@ def startPong():
 
 def pongGame(l_score, r_score, paddle_size, speed):
     print("Starting game")
+
+    # Generate initial velocity
     seed = random.randint(1, 4)
     if (seed == 1):
         ball_vx = 1
@@ -65,10 +67,15 @@ def pongGame(l_score, r_score, paddle_size, speed):
     else:
         ball_vx = -1
         ball_vy = -1
-    
-    ball = [LED_COLS/2, LED_ROWS/2]
+
+    # Generate initial positions
+    x_shift = random.randint(0, 4) - 2
+    y_shift = random.randint(0, 4) - 2
+    ball = [LED_COLS/2 + x_shift, LED_ROWS/2 + y_shift]
     l_paddle = [0, LED_ROWS/2]
     r_paddle = [LED_COLS-1, LED_ROWS/2]
+
+    ball_color = (200, 200, 200)
 
     print("Checking for win")
     print("Left: " + str(l_score))
@@ -81,6 +88,7 @@ def pongGame(l_score, r_score, paddle_size, speed):
         l_score = 0
         r_score = 0
         r_win()
+
     while True:
         
         # Check for ball bounce on ceiling and floor
@@ -100,8 +108,10 @@ def pongGame(l_score, r_score, paddle_size, speed):
         # Check for ball bouncing on paddle
         if (ball[0] == LED_COLS - 2 and ball[1] >= l_paddle[1] - paddle_size // 2 and ball[1] <= l_paddle[1] + paddle_size // 2):
             ball_vx = -1 * abs(ball_vx)
+            color = (random.randint(10, 200), random.randint(10, 200), random.randint(10, 200))
         elif (ball[0] == 1 and ball[1] >= r_paddle[1] - paddle_size // 2 and ball[1] <= r_paddle[1] + paddle_size // 2):
             ball_vx = abs(ball_vx) 
+            color = (random.randint(10, 200), random.randint(10, 200), random.randint(10, 200))
 
         # Update ball
         ball[0] += ball_vx
@@ -122,10 +132,7 @@ def pongGame(l_score, r_score, paddle_size, speed):
             r_paddle[1] += 1
 
         # Draw Ball
-        color_r = random.randint(10, 200)
-        color_g = random.randint(10, 200)
-        color_b = random.randint(10, 200)
-        setPX(ball[0], ball[1], (color_r, color_g, color_b))
+        setPX(ball[0], ball[1], color)
 
         # Draw left paddle
         for i in range(paddle_size):
@@ -137,8 +144,9 @@ def pongGame(l_score, r_score, paddle_size, speed):
             offset = i - paddle_size // 2 
             setPX(r_paddle[0], r_paddle[1] + offset, (200, 200, 200))
 
+        # Update screen
         push() 
-        sleep_ms(speed * 10 / 1000)
+        sleep_ms(100/speed)
         wipe((0, 0, 0), clear = False)
 
 def startSnake():
