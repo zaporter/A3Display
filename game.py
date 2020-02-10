@@ -26,7 +26,7 @@ def endGame(score):
         sleep_ms(200)
         wipe((30,30,30))
         sleep_ms(200)
-    displayText("Score: "+str(score), (100,10,10),(20,30,30),20,loops=1)
+    displayText("Score: "+str(score), (200,10,10),(70,90,70),20,loops=1)
     sleep_ms(500)
    
     #while (not (game_popCommand() == KEY_TRIGGER)):
@@ -132,7 +132,7 @@ def pongGame(l_score, r_score, paddle_size, speed):
             r_paddle[1] += 1
 
         # Draw Ball
-        setPX(ball[0], ball[1], color)
+        setPX(ball[0], ball[1], ball_color)
 
         # Draw left paddle
         for i in range(paddle_size):
@@ -187,11 +187,11 @@ def startSnake():
         for x in range(len(snake)-1):
             snake[len(snake)-x-1]=[snake[len(snake)-x-2][0], snake[len(snake)-x-2][1]]
         for x in range(len(snake)):
-            if not (setPX(snake[x][0], snake[x][1],(30*x,20*len(snake)+10*x,25*len(snake)))):
+            if not (setPX(snake[x][0], snake[x][1],(90*x,90*len(snake)+10*x,85*len(snake)))):
                 endGame(len(snake)-2)
         setPX(candyX, candyY, (255,200,0))
         push()
-        sleep_ms(100)
+        sleep_ms(170)
         
 
 

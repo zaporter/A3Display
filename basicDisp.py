@@ -17,10 +17,16 @@ LED_CHANNEL    = 0
 LED_ZERO       = 278
 GAME_INPUT1    = "/home/pi/A3Display/www/html/controller_in.txt"
 GAME_INPUT2    = "/home/pi/A3Display/www/html/controller2_in.txt"
-
+LED_COLOR_GAIN = 8
+LED_COLOR_CONSTANT = ((255.0/LED_COLOR_GAIN) + 1) ** (1.0/255.0) # Approx solution to A(k^255 - 1) = 255
+LED_GAIN_MAP   = [0]*256
 stripColorMap=[[(0,0,0)]*LED_ROWS]*LED_COLS
 
 strip= type('strip', (object,), {})()
+
+def init_gain_map():
+    for x in range(256):
+        LED_GAIN_MAP[x]=int(LED_COLOR_GAIN*((LED_COLOR_CONSTANT ** (x))-1)) 
 
 def push():
     if (strip.previewMode):
@@ -35,13 +41,20 @@ def setPX(x, y, colorTuple):
     if (x>=LED_COLS or x<0 or y>=LED_ROWS or y<0):
       #  print('Invalid set. Outside of bounds')
         return False
-    strip.previewImg.putpixel((x,y), colorTuple)
+    #strip.previewImg.putpixel((x,y), colorTuple)
     if (not strip.previewMode):
-        colorIn= [colorTuple[0],colorTuple[1],colorTuple[2]]
-        #for alpha in range(3):
-        #    while(colorIn[alpha]> 100):
-        #        colorIn[alpha]-=10
-        color = Color(colorIn[0], colorIn[1], colorIn[2])
+        # Compute new color along exponential curve
+        # color(x) = A(k^x - 1)
+        # color(0) = 0
+        # color(255) = 255
+        color = Color(
+                LED_GAIN_MAP[colorTuple[0]%256],
+                LED_GAIN_MAP[colorTuple[1]%256],
+                LED_GAIN_MAP[colorTuple[2]%256])
+        #color = Color(
+        #            int(LED_COLOR_GAIN*((LED_COLOR_CONSTANT ** (colorTuple[0]%256))-1)), 
+        #            int(LED_COLOR_GAIN*((LED_COLOR_CONSTANT ** (colorTuple[1]%256))-1)), 
+        #            int(LED_COLOR_GAIN*((LED_COLOR_CONSTANT ** (colorTuple[2]%256))-1))) 
         pixel = 0
         if (x==0):
             pixel = LED_ZERO+y
