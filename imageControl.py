@@ -107,7 +107,7 @@ def dropText(img, text, font, colorRGB, wait_ms, scroll_no, bottomMax=(255,255,2
             img=back_img.copy()
             draw = ImageDraw.Draw(img)
 
-def flashText(text, textColor1, textColor2, bgColor1, bgColor2, speed=10, loop=20000000, loc=(0,1), size=14):
+def flashText(text, textColor1, textColor2, bgColor1, bgColor2, speed=10, loop=1000, loc=(0,1), size=14):
     # Flash the background and the text
     font = ImageFont.truetype("fonts/helvetica.ttf", size)
     bgImage1 = Image.new('RGB',(LED_COLS,LED_ROWS), color=bgColor1)
@@ -128,7 +128,7 @@ def flashText(text, textColor1, textColor2, bgColor1, bgColor2, speed=10, loop=2
         sleep_ms(speed)
 
 
-def defaultText(text, textColor=(0, 0, 0), bgColor=(200, 200, 200), speed=1, loop=20000000, size=14):
+def defaultText(text, textColor=(0, 0, 0), bgColor=(200, 200, 200), speed=1, loop=1000, size=14):
     # Wrapper for scrollText with less mandatory inputs
     font = ImageFont.truetype("fonts/helvetica.ttf", size)
     image = Image.new('RGB',(LED_COLS,LED_ROWS),color=bgColor)

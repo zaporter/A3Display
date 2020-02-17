@@ -38,9 +38,10 @@
             <div class="container">
                 <div class="section">
                     <h3>Writing Text</h3>
-					<h5>displayText(string text, rgb text_color, rgb bg_color, int speed)</h5>
+					<h5>defaultText(text, text_color=(0,0,0), bg_color=(200,200,200), speed=1, loop=1000, size=14)</h5>
                     <p>This is the simplest interface for writing text to the board. RGB values are defined as a tuple with 3 values 0-255 (e.g. (124, 200, 255)). This function will scroll the given text from right to left across the screen. You need to pass the text color and background color, as well as a speed (refresh rate) a good speed to start is 10.</p>
 					<h5>dropText(image img, string text, string font, int wait_ms, int scroll_no)</h5>
+					<h5>flashText(text, textColor1, textColor2, bgColor1, bgColor2, speed=10, loop=1000, loc=(0,1), size=14)</h5>
                 </div>
             </div>
 
