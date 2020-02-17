@@ -71,7 +71,6 @@ def findFirstDiff(img1, img2):
 def isEquivImg(img1, img2):
     return (findFirstDiff(img1,img2) == (-1,-1))
 
-
 def scrollText( img, text, font, colorRGB, wait_ms, scroll_no, loc=(0,0)):
     print("Scrolling text: "+text)
     back_img = img.copy()
@@ -108,7 +107,32 @@ def dropText(img, text, font, colorRGB, wait_ms, scroll_no, bottomMax=(255,255,2
             img=back_img.copy()
             draw = ImageDraw.Draw(img)
 
+def flashText(text, textColor1, textColor2, bgColor1, bgColor2, speed=10, loop=20000000, loc=(0,1), size=14):
+    # Flash the background and the text
+    font = ImageFont.truetype("fonts/helvetica.ttf", size)
+    bgImage1 = Image.new('RGB',(LED_COLS,LED_ROWS), color=bgColor1)
+    bgImage2 = Image.new('RGB',(LED_COLS,LED_ROWS), color=bgColor2)
+    frames = []
+    size = draw.textsize(text, font)
 
+    draw = ImageDraw.Draw(bgImage1)
+    draw.text((LED_COLS,loc[1]), text, font=font, fill=textColor1)
+    frames.append(bgImage1)
+
+    draw = ImageDraw.Draw(bgImage2)
+    draw.text((LED_COLS,loc[1]), text, font=font, fill=textColor2)
+    frames.append(bgImage2)
+
+    for i in range(2*loop):
+        pushImage(frames[i%2])
+        sleep_ms(speed)
+
+
+def defaultText(text, textColor=(0, 0, 0), bgColor=(200, 200, 200), speed=1, loop=20000000, size=14):
+    # Wrapper for scrollText with less mandatory inputs
+    font = ImageFont.truetype("fonts/helvetica.ttf", size)
+    image = Image.new('RGB',(LED_COLS,LED_ROWS),color=bgColor)
+    scrollText(image, text, font, textColor, speed, loop, loc=(0,1))
 
 def drawBorder(img, color, justTop=False):
     draw = ImageDraw.Draw(img)
@@ -117,13 +141,6 @@ def drawBorder(img, color, justTop=False):
     if (not justTop):
         draw.line((0,0,0,LED_ROWS-1),fill=color)
         draw.line((LED_COLS-1,0,LED_COLS-1,LED_ROWS-1),fill=color)
-
-def displayText(text, text_color, bg_color, speed, loops=20000000,size=14):
-    print("Displaying text: "+text)
-    """Renders scrolling text in helvetic font with a given bg and text color (R, G, B) and a given update speed"""
-    font = ImageFont.truetype("fonts/helvetica.ttf", size)
-    image = Image.new('RGB',(LED_COLS,LED_ROWS),color=bg_color)
-    scrollText( image, text.upper(), font, text_color, speed, loops, loc=(0,1))
 
 
 
