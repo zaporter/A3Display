@@ -26,7 +26,7 @@ def endGame(score):
         sleep_ms(200)
         wipe((30,30,30))
         sleep_ms(200)
-    displayText("Score: "+str(score), (200,10,10),(70,90,70),20,loops=1)
+    defaultText("Score: "+str(score), textColor=(200,10,10),bgColor=(70,90,70),speed=1,loop=1)
     sleep_ms(500)
    
     #while (not (game_popCommand() == KEY_TRIGGER)):
