@@ -113,14 +113,14 @@ def flashText(text, textColor1, textColor2, bgColor1, bgColor2, speed=10, loop=1
     bgImage1 = Image.new('RGB',(LED_COLS,LED_ROWS), color=bgColor1)
     bgImage2 = Image.new('RGB',(LED_COLS,LED_ROWS), color=bgColor2)
     frames = []
-    size = draw.textsize(text, font)
 
     draw = ImageDraw.Draw(bgImage1)
-    draw.text((LED_COLS,loc[1]), text, font=font, fill=textColor1)
+    size = draw.textsize(text, font)
+    draw.text((loc[0],loc[1]), text, font=font, fill=textColor1)
     frames.append(bgImage1)
 
     draw = ImageDraw.Draw(bgImage2)
-    draw.text((LED_COLS,loc[1]), text, font=font, fill=textColor2)
+    draw.text((loc[0],loc[1]), text, font=font, fill=textColor2)
     frames.append(bgImage2)
 
     for i in range(2*loop):
