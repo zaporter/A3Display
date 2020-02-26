@@ -41,7 +41,7 @@ def setPX(x, y, colorTuple):
     if (x>=LED_COLS or x<0 or y>=LED_ROWS or y<0):
       #  print('Invalid set. Outside of bounds')
         return False
-    #strip.previewImg.putpixel((x,y), colorTuple)
+    strip.previewImg.putpixel((x,y), colorTuple)
     if (not strip.previewMode):
         # Compute new color along exponential curve
         # color(x) = A(k^x - 1)
