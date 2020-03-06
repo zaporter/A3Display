@@ -27,7 +27,7 @@ def runDisplay(strip, filename_a3d):
 if __name__ == '__main__':
     print("Starting!")
     run = True
-    init_gain_map()
+    init_led_maps()
     parser = argparse.ArgumentParser()
     parser.add_argument("-r","--run", action="store_true", help="run code")
     parser.add_argument("-p","--prev", action="store_true", help="preview")
